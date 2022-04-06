@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>{% block title %}base{% endblock %}</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="sticky-footer-navbar.css" rel="stylesheet"> -->
+</head>
+<body class="d-flex flex-column h-100">
+
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <h1>Ask Maksimova</h1>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" size="55">
+                    <button class="btn btn-outline-success button-ask" type="submit">ASK!</button>
+                </form>
+            </div>
+            <div class="row userblock">
+                <div class="col-2">
+                    <img src="img/duck.jpeg" class="avatar-user">
+                </div>
+                <div class="col-10">
+                    <h4>Елизавета Максимова</h4>
+                    <div>
+                        <a href="user.html" class="userblock-link">settings</a>
+                        <a href="log_out.html" class="userblock-link">log_out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-9">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <h2 class="mt-5 section-title">Popular Tags</h2>
+                    <ul class="navbar-nav">
+                        <li>
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#">Dance</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#">Duck</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <h2 class="mt-5 section-title">Best Members</h2>
+                    <a href="#">Mr. Freeman</a>
+                    <a href="#">Bender</a>
+                    <a href="#">Dr. House</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">Спасибо, что посетили мой сайт!</span>
+    </div>
+</footer>
+
+
+<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>
