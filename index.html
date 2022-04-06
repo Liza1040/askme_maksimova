@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Sticky Footer Navbar Template · Bootstrap v5.1</title>
+    <title>Листинг вопросов</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -31,7 +31,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
+    <!-- <link href="sticky-footer-navbar.css" rel="stylesheet"> -->
 </head>
 <body class="d-flex flex-column h-100">
 
@@ -39,27 +39,26 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Fixed navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" href="index.html">
+                <h1>Ask Maksimova</h1>
+            </a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" size="55">
+                    <button class="btn btn-outline-success button-ask" type="submit">ASK!</button>
                 </form>
+            </div>
+            <div class="row userblock">
+                <div class="col-2">
+                    <img src="img/duck.jpeg" class="avatar-user">
+                </div>
+                <div class="col-10">
+                    <h4>Елизавета Максимова</h4>
+                    <div>
+                        <a href="user.html" class="userblock-link">settings</a>
+                        <a href="log_out.html" class="userblock-link">log_out</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -70,44 +69,91 @@
     <div class="container">
         <div class="row">
             <div class="col-9">
-                <h2 class="mt-5">Questions</h2>
+                <div class="row">
+                        <h2 class="mt-5 section-title" >Questions</h2>
+                        <a href="" class="userblock-link">Hot Questions</a>
+                </div>
                 <div class="row question">
                     <div class="col-2">
                         <img class="avatar-question" src="img/duck.jpeg" alt="">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
+                                <img src="img/like.png" width="40px" height="30px">
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
+                                <img src="img/dislike.png" width="40px" height="30px">
+                            </button>
+                          </div>
                     </div>
                     <div class="col-10">
-                        <h3><a href="question.html">Question 1</a></h3>
-                        <p>Текст (от лат. textus — ткань; сплетение, сочетание) — зафиксированная на каком-либо
-                            материальном носителе человеческая мысль; в общем плане связная и полная последовательность
-                            символов.</p>
+                        <h3><a href="question.html">How to learn to dance?</a></h3>
+                        <p>Hello! I have long wanted to learn the art of dance. How to learn to dance?</p>
                     </div>
                 </div>
                 <div class="row question">
                     <div class="col-2">
                         <img class="avatar-question" src="img/duck.jpeg" alt="">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
+                                <img src="img/like.png" width="40px" height="30px">
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
+                                <img src="img/dislike.png" width="40px" height="30px">
+                            </button>
+                          </div>
                     </div>
                     <div class="col-10">
-                        <h3>Question 2</h3>
-                        <p>Текст (от лат. textus — ткань; сплетение, сочетание) — зафиксированная на каком-либо
-                            материальном носителе человеческая мысль; в общем плане связная и полная последовательность
-                            символов.</p>
+                        <h3><a href="question.html">How to learn to dance?</a></h3>
+                        <p>Hello! I have long wanted to learn the art of dance. How to learn to dance?</p>
                     </div>
                 </div>
                 <div class="row question">
                     <div class="col-2">
                         <img class="avatar-question" src="img/duck.jpeg" alt="">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
+                                <img src="img/like.png" width="40px" height="30px">
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
+                                <img src="img/dislike.png" width="40px" height="30px">
+                            </button>
+                          </div>
                     </div>
                     <div class="col-10">
-                        <h3>Question 3</h3>
-                        <p>Текст (от лат. textus — ткань; сплетение, сочетание) — зафиксированная на каком-либо
-                            материальном носителе человеческая мысль; в общем плане связная и полная последовательность
-                            символов.</p>
+                        <h3><a href="question.html">How to learn to dance?</a></h3>
+                        <p>Hello! I have long wanted to learn the art of dance. How to learn to dance?</p>
                     </div>
                 </div>
-
+                <div class="userblock-link">
+                    <a href="" title="На страницу номер 1">1</a>
+                    <a href="" title="На страницу номер 2">2</a>
+                    <a href="" title="На страницу номер 3">3</a>
+                    <a href="" title="На страницу номер 4">4</a>
+                    <a href="" title="На следующую страницу">...</a>
+                    <a href="" title="На последнюю страницу">50</a>
+                </div>
             </div>
             <div class="col-3">
-                <h2 class="at-5">Tags</h2>
+                <div class="row">
+                    <h2 class="mt-5 section-title">Popular Tags</h2>
+                    <ul class="navbar-nav">
+                        <li>
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#">Dance</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#">Duck</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <h2 class="mt-5 section-title">Best Members</h2>
+                    <a href="#">Mr. Freeman</a>
+                    <a href="#">Bender</a>
+                    <a href="#">Dr. House</a>
+                </div>
             </div>
         </div>
     </div>
@@ -115,7 +161,7 @@
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+        <span class="text-muted">Спасибо, что посетили мой сайт!</span>
     </div>
 </footer>
 
