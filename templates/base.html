@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>{% block title %}base{% endblock %}</title>
+    <title>Ask Maksimova</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -49,6 +49,7 @@
                 </form>
             </div>
             <div class="row userblock">
+                {% block userblock %}
                 <div class="col-2">
                     <img src="img/duck.jpeg" class="avatar-user">
                 </div>
@@ -59,6 +60,7 @@
                         <a href="log_out.html" class="userblock-link">log_out</a>
                     </div>
                 </div>
+                {% endblock %}
             </div>
         </div>
     </nav>

@@ -49,9 +49,15 @@
                 </form>
             </div>
             <div class="row userblock">
-                <div>
-                    <a href="log_in.html" class="userblock-link">log in</a>
-                    <a href="register.html" class="userblock-link">register</a>
+                <div class="col-2">
+                    <img src="img/duck.jpeg" class="avatar-user">
+                </div>
+                <div class="col-10">
+                    <h4>Елизавета Максимова</h4>
+                    <div>
+                        <a href="user.html" class="userblock-link">settings</a>
+                        <a href="log_out.html" class="userblock-link">log_out</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,40 +69,54 @@
     <div class="container">
         <div class="row">
             <div class="col-9">
-                <h2 class="mt-5">New Question</h2>
+                <h2 class="mt-5">Settings: Елизавета Максимова</h2>
                 <div class="form-text text-error">
-                    <h5>Sorri, the data is incorrect!</h5>
+                    <h5>Sorri, the email address allready registred!</h5>
                 </div>
                 <form>
                     <div class="row mb-3">
                         <div class="col-2">
-                            <label for="InputTitle" class="form-label">Question title</label>
+                            <label for="InputLogin" class="form-label">Login</label>
                         </div>
                         <div class="col-10">
-                            <input type="text" class="form-control input" id="InputTitle">
+                            <input type="text" class="form-control input" id="InputLogin">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-2">
-                            <label for="questionText" class="form-label">Text</label>
+                            <label for="InputEmail" class="form-label">Email</label>
                         </div>
                         <div class="col-10">
-                            <textarea class="form-control input" id="questionText" rows="10"></textarea>
+                            <input type="email" class="form-control input" id="InputEmail">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-2">
-                            <label for="questionTags" class="form-label">Tags</label>
+                            <label for="InputNickName" class="form-label">NickName</label>
                         </div>
                         <div class="col-10">
-                            <input type="text" class="form-control input" id="questionTags">
+                            <input type="text" class="form-control input" id="InputNickName">
                         </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-2">
+                            <label for="InputAvatar" class="form-label">Upload avatar</label>
+                        </div>
+                        <div class="col-2">
+                                <img class="avatar-question" src="img/duck.jpeg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control input" id="InputAvatar">
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary choose-avatar">choose</button>
+                        </div>                                      
                     </div>
                     <div class="row mb-3">
                         <div class="col-2">
                         </div>
                         <div class="col-10">
-                            <button type="submit" class="btn btn-primary new-question-ask">ASK!</button>
+                            <button type="submit" class="btn btn-primary new-question-ask">Save</button>
                         </div>
                     </div>
                   </form>

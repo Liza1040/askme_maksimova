@@ -30,7 +30,7 @@ main > .container {
 }
 
 .userblock {
-    margin-right: 50px;
+    margin-right: 100px;
     color: white;
 }
 
@@ -49,4 +49,25 @@ main > .container {
 
 .margin-left {
     margin-left: 30px;
+}
+
+.text-error {
+    color: red;
+}
+
+.new-question-ask {
+    margin-top: 20px;
+    background: green;
+}
+
+.input {
+    width: 620px;
+}
+
+#InputAvatar {
+    width: 300px;
+}
+
+.choose-avatar {
+    background: green;
 }
