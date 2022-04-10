@@ -1,3 +1,43 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models import CASCADE
+from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
-# Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=CASCADE)
+    nickname = models.CharField(max_length=16)
+    avatar = models.ImageField(upload_to="avatar/%Y/%m/%d", default="duck.jpeg")
+    rating = models.IntegerField(default=0)
+
+class Tag(models.Model):
+    text = models.CharField(max_length=16)
+    rating = models.IntegerField(default=0)
+
+class Like(models.Model):
+    GRADE = ((1, 'like'), (-1, 'dislike'))
+    # ACTION = {x[1]: x[0] for x in GRADE}
+
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    rating = models.IntegerField(choices=GRADE)
+    content_type = models.ForeignKey(ContentType, default=None, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_id = GenericForeignKey()
+
+class Question(models.Model):
+    author = models.ForeignKey(User, null=False, on_delete=models.DO_NOTHING)
+    title = models.CharField(max_length=64)
+    text = models.CharField(max_length=1024)
+    date = models.DateTimeField(auto_now_add=True)
+    tag = models.ManyToManyField(Tag, related_name='questions', blank=True)
+    vote = GenericRelation(Like, related_query_name='questions')
+    rating = models.IntegerField(default=0, null=False)
+
+class Answer(models.Model):
+    body = models.CharField(max_length=256, null=False)
+    author = models.ForeignKey(User, null=False, on_delete=models.DO_NOTHING)
+    date = models.DateTimeField(auto_now_add=True)
+    question = models.ForeignKey(Question, null=False, on_delete=CASCADE, related_name='answers')
+    vote = GenericRelation(Like, related_query_name='questions')
+    rating = models.IntegerField(default=0, null=False)
+    correct = models.BooleanField(default=False)
