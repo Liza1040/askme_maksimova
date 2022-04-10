@@ -1,4 +1,5 @@
-<!doctype html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
     <meta charset="utf-8">
@@ -8,8 +9,8 @@
     <meta name="generator" content="Hugo 0.88.1">
     <title>Ask Maksimova</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" >
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
 
     <style>
       .bd-placeholder-img {
@@ -39,11 +40,11 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{% url "index" %}">
                 <h1>Ask Maksimova</h1>
             </a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <form class="d-flex">
+                <form class="d-flex" action="{% url "ask" %}">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" size="55">
                     <button class="btn btn-outline-success button-ask" type="submit">ASK!</button>
                 </form>
@@ -51,13 +52,13 @@
             <div class="row userblock">
                 {% block userblock %}
                 <div class="col-2">
-                    <img src="img/duck.jpeg" class="avatar-user">
+                    <img src="{% static "img/duck.jpeg" %}" class="avatar-user">
                 </div>
                 <div class="col-10">
                     <h4>Елизавета Максимова</h4>
                     <div>
-                        <a href="user.html" class="userblock-link">settings</a>
-                        <a href="log_out.html" class="userblock-link">log_out</a>
+                        <a href="{% url "settings" %}" class="userblock-link">settings</a>
+                        <a href="{% url "login" %}" class="userblock-link">log_out</a>
                     </div>
                 </div>
                 {% endblock %}
@@ -71,21 +72,22 @@
     <div class="container">
         <div class="row">
             <div class="col-9">
-                {% block content %}{% endblock %}
+                {% block content %}
+                {% endblock content %}
             </div>
             <div class="col-3">
                 <div class="row">
                     <h2 class="mt-5 section-title">Popular Tags</h2>
                     <ul class="navbar-nav">
-                        <li>
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Dance</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Duck</a>
-                        </li>
+                    <li>
+                      <a class="nav-link" href="{% url "tag" t='dance' %}">Dance</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url "tag" t='dance' %}">Dance</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url "tag" t='duck' %}">Duck</a>
+                    </li>
                     </ul>
                 </div>
                 <div class="row">

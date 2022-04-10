@@ -1,140 +1,46 @@
-<!doctype html>
-<html lang="en" class="h-100">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
-    <title>Ask Maksimova</title>
+{% extends "inc/base.html" %}
+{% load static %}
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+{% block userblock %}
+    <div>
+        <a href="{% url "login" %}" class="userblock-link">log in</a>
+        <a href="{% url "register" %}" class="userblock-link">register</a>
+    </div>
+{% endblock userblock %}
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-
-    </style>
-
-
-    <!-- Custom styles for this template -->
-    <!-- <link href="sticky-footer-navbar.css" rel="stylesheet"> -->
-</head>
-<body class="d-flex flex-column h-100">
-
-<header>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <h1>Ask Maksimova</h1>
-            </a>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" size="55">
-                    <button class="btn btn-outline-success button-ask" type="submit">ASK!</button>
-                </form>
+{% block content %}
+    <h2 class="mt-5">Log In</h2>
+    <div class="form-text text-error">
+        <h5>Sorri, wrong password!</h5>
+    </div>
+    <form>
+        <div class="row mb-3">
+            <div class="col-2">
+                <label for="InputLogin" class="form-label">Login</label>
             </div>
-            <div class="row userblock">
-                <div>
-                    <a href="log_in.html" class="userblock-link">log in</a>
-                    <a href="register.html" class="userblock-link">register</a>
-                </div>
+            <div class="col-10">
+                <input type="text" class="form-control input" id="InputLogin">
             </div>
         </div>
-    </nav>
-</header>
-
-<!-- Begin page content -->
-<main class="flex-shrink-0">
-    <div class="container">
-        <div class="row">
-            <div class="col-9">
-                <h2 class="mt-5">Log In</h2>
-                <div class="form-text text-error">
-                    <h5>Sorri, wrong password!</h5>
-                </div>
-                <form>
-                    <div class="row mb-3">
-                        <div class="col-2">
-                            <label for="InputLogin" class="form-label">Login</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" class="form-control input" id="InputLogin">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2">
-                            <label for="InputPassword" class="form-label">Password</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" class="form-control input" id="InputPassword">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2"></div>
-                        <div class="col-10">
-                            <button type="submit" class="btn btn-primary new-question-ask">Log in!</button>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2"></div>
-                        <div class="col-10">
-                            <a href="signup.html">create new account</a>
-                        </div>
-                    </div>
-                </form>
+        <div class="row mb-3">
+            <div class="col-2">
+                <label for="InputPassword" class="form-label">Password</label>
             </div>
-            <div class="col-3">
-                <div class="row">
-                    <h2 class="mt-5 section-title">Popular Tags</h2>
-                    <ul class="navbar-nav">
-                        <li>
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Dance</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Duck</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <h2 class="mt-5 section-title">Best Members</h2>
-                    <a href="#">Mr. Freeman</a>
-                    <a href="#">Bender</a>
-                    <a href="#">Dr. House</a>
-                </div>
+            <div class="col-10">
+                <input type="password" class="form-control input" id="InputPassword">
             </div>
         </div>
-    </div>
-</main>
-
-<footer class="footer mt-auto py-3 bg-light">
-    <div class="container">
-        <span class="text-muted">Спасибо, что посетили мой сайт!</span>
-    </div>
-</footer>
-
-
-<script src="/docs/5.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-
-
-</body>
-</html>
+        <div class="row mb-3">
+            <div class="col-2"></div>
+            <div class="col-10">
+                <button type="submit" class="btn btn-primary new-question-ask">Log in!</button>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-2"></div>
+            <div class="col-10">
+                <a href="{% url "register" %}">create new account</a>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
