@@ -71,3 +71,33 @@ main > .container {
 .choose-avatar {
     background: green;
 }
+
+.tags {
+  color: white;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #000000;
+  height: 60px;
+}
+
+.topnav-buttons {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 11px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav-buttons-login {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 0px 15px;
+  text-decoration: none;
+  font-size: 17px;
+}

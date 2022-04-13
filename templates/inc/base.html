@@ -40,7 +40,7 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url "index" %}">
+            <a class="navbar-brand" href="{% url "new" %}">
                 <h1>Ask Maksimova</h1>
             </a>
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -51,16 +51,23 @@
             </div>
             <div class="row userblock">
                 {% block userblock %}
-                <div class="col-2">
-                    <img src="{% static "img/duck.jpeg" %}" class="avatar-user">
-                </div>
-                <div class="col-10">
-                    <h4>Елизавета Максимова</h4>
-                    <div>
-                        <a href="{% url "settings" %}" class="userblock-link">settings</a>
-                        <a href="{% url "login" %}" class="userblock-link">log_out</a>
-                    </div>
-                </div>
+                    {% if request.user.is_authenticated %}
+                        <div class="col-2">
+                            <img src="{{ request.user.profile.avatar.url }}" class="avatar-user">
+                        </div>
+                        <div class="col-10">
+                            <h4>{{ user.profile.nickname }}</h4>
+                            <div>
+                                <a href="#" class="userblock-link">settings</a>
+                                <a href="{% url 'logout' %}?next={{ request.path }}" class="userblock-link">log_out</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <span >
+                            <a href="{% url "login" %}?next={{ request.path }}" class="userblock-link">log in</a>
+                            <a href="{% url "signup" %}" class="userblock-link">register</a>
+                        </span>
+                    {% endif %}
                 {% endblock %}
             </div>
         </div>
@@ -78,23 +85,31 @@
             <div class="col-3">
                 <div class="row">
                     <h2 class="mt-5 section-title">Popular Tags</h2>
-                    <ul class="navbar-nav">
-                    <li>
-                      <a class="nav-link" href="{% url "tag" t='dance' %}">Dance</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{% url "tag" t='dance' %}">Dance</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="{% url "tag" t='duck' %}">Duck</a>
-                    </li>
-                    </ul>
+                    <table class="table-striped tags">
+                        <tr>
+                            {% for tag in top_tags %}
+                                <td>
+                                    <a class="tags" href="{% url 'tag' pk=tag %}">{{ tag }}</a>
+                                </td>
+                                {% if forloop.counter|divisibleby:"3" %}
+                                    </tr>
+                                    <tr>
+                                {% endif %}
+                            {% endfor %}
+                    </table>
                 </div>
                 <div class="row">
                     <h2 class="mt-5 section-title">Best Members</h2>
-                    <a href="#">Mr. Freeman</a>
-                    <a href="#">Bender</a>
-                    <a href="#">Dr. House</a>
+                    <table class="table-striped users">
+                        {% for user in top_users %}
+                            <tr>
+                                <td>{{ user.user }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+<!--                    <a href="#">Mr. Freeman</a>-->
+<!--                    <a href="#">Bender</a>-->
+<!--                    <a href="#">Dr. House</a>-->
                 </div>
             </div>
         </div>

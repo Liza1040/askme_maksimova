@@ -12,13 +12,18 @@
         </div>
     </div>
     <div class="col-10">
-        <h3><a href="{% url "question" question.number %}">{{ question.title }}</a></h3>
+        <h3><a href="{% url 'question' pk=question.id %}">{{ question.title }}</a></h3>
         <p>{{ question.text }}</p>
         <p>
             Tags:
-            <a href="">dance</a>
-            <a href="">music</a>
-            <a href="" class="margin-left">answer(3)</a>
+            {% for tag in question.tag.all %}
+                    {% if forloop.last %}
+                    <a class="clickable" href="{% url 'tag' pk=tag %}">{{ tag.text }}</a>
+                    {% else %}
+                    <a class="clickable" href="{% url 'tag' pk=tag %}">{{ tag.text }},</a>
+                    {% endif %}
+            {% endfor %}
+            <a href="" class="margin-left">answer({{question.answers.count}})</a>
         </p>
     </div>
 </div>
