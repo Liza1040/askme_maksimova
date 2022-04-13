@@ -1,0 +1,13 @@
+{% extends "inc/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div>Tag: {{ tag }}</div>
+    </div>
+
+    {% for question in questions %}
+    {% include "inc/question.html" %}
+    {% endfor %}
+
+{% endblock content %}
