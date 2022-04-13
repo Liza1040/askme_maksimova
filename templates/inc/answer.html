@@ -12,8 +12,8 @@
         </div>
     </div>
     <div class="col-10">
-        <p>Answer! blablabla</p>
-        <input type="checkbox">
+        <p>{{ answer.body }}</p>
+        <input type="checkbox" id="correct{{ answer.pk }}" data-aid="{{ answer.pk }}" data-qid="{{ q.pk }}" {% if answer.correct %} checked {% endif %}>
         Correct!
     </div>
 </div>

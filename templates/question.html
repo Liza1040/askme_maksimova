@@ -16,18 +16,24 @@
             </div>
         </div>
         <div class="col-10">
-            <h3 class="mt-5 section-title">{{ question.title }}</h3>
+            <h3>{{ question.title }}</h3>
             <p>{{ question.text }}</p>
             <p>
                 Tags:
-                <a href="">dance</a>
-                <a href="">music</a>
+                {% for tag in question.tag.all %}
+                    {% if forloop.last %}
+                        <a class="clickable" href="{% url 'tag' pk=tag %}">{{ tag.text }}</a>
+                    {% else %}
+                        <a class="clickable" href="{% url 'tag' pk=tag %}">{{ tag.text }},</a>
+                    {% endif %}
+                {% endfor %}
             </p>
         </div>
     </div>
     <hr/>
-    {% include "inc/answer.html" %}
-    {% include "inc/answer.html" %}
+    {% for answer in answers %}
+            {%  include "inc/answer.html" %}
+    {% endfor %}
     <hr/>
     <div class="mb-3 section-title">
         <textarea class="form-control" id="questionText" placeholder="Enter your answer here..." rows="3"></textarea>

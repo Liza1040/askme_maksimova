@@ -21,7 +21,6 @@ def paginate(objects, request, per_page=20):
 
 def index(request):
     questions = paginate(Question.objects.get_new(), request)
-    print(questions[0].id)
     if questions is None:
         raise Http404
     return render(request, 'index.html', {
@@ -68,7 +67,7 @@ def one_question(request, pk):
     answer = paginate(Answer.objects.get_answer(pk), request)
     answers_count = Answer.objects.get_count_answer(pk)
     return render(request, 'question.html', {
-        'q': selected_question,
+        'question': selected_question,
         'answers_count': answers_count,
         'answers': answer
         # 'form': form
