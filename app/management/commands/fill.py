@@ -5,149 +5,92 @@ from faker import Faker
 
 from app.models import *
 
-COUNT_THOUSAND_TAG = 11
-COUNT_USER = 11000
-COUNT_QUESTION = 101000
+COUNT_TAG = 10010
+COUNT_USER = 10010
+COUNT_QUESTION = 100010
 COUNT_TAG_IN_QUESTION = 5
-COUNT_ANSWER = 1001000
-COUNT_LIKE_QUESTION = 1000000
-COUNT_LIKE_ANSWER = 1000000
+COUNT_ANSWER = 1000010
+COUNT_LIKE_QUESTION = 1000010
+COUNT_LIKE_ANSWER = 1000010
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        for i in range(COUNT_THOUSAND_TAG):
-            tag_text = set()
-            while len(tag_text) != 999:
-                tag_text.add(Faker().word() + str(randint(1000, 2000)) + str(i))
-                print(11 - i, ' ', len(tag_text))
-            tags = []
-            for k in tag_text:
-                tags.append(Tag(text=k))
-            Tag.objects.bulk_create(tags)
-
-        user = [
-            User(
-                username=Faker().simple_profile()['username'] + Faker().pystr()[:10],
-                email=Faker().email(),
-                password=Faker().name()
+        faker = Faker()
+        tags = [
+            Tag(
+                text=faker.word() + str(i)
             )
-            for i in range(COUNT_USER)
+            for i in range(COUNT_TAG)
         ]
+        Tag.objects.bulk_create(tags)
+
+        user = []
+        for i in range(COUNT_USER):
+            user.append(User(
+                id=i,
+                username=faker.simple_profile()['username'] + str(i),
+                email=faker.email(),
+                password=faker.password()
+            ))
+            print(i)
         User.objects.bulk_create(user)
-        # for i in range(COUNT_USER):
-        #     user = User.objects.create(username=Faker().simple_profile()['username'] + Faker().pystr()[:10],
-        #                                email=Faker().email(),
-        #                                password=Faker().name())
-        #     user.profile.nickname = Faker().simple_profile()['username'] + Faker().pystr()[:10]
-        #     user.save()
-        #     print(i)
 
-        profile = [
-            Profile(
+        profile = []
+        for i in range(COUNT_USER):
+            profile.append(Profile(
                 user=User.objects.get(pk=i),
-                nickname=Faker().simple_profile()['username'] + Faker().pystr()[:10]
-            )
-            for i in range(COUNT_USER)
-        ]
+                nickname=faker.simple_profile()['username'] + str(i)
+            ))
+            print('p', i)
         Profile.objects.bulk_create(profile)
 
-        tags = [] * COUNT_QUESTION
         for i in range(COUNT_QUESTION):
-            for j in range(COUNT_TAG_IN_QUESTION):
-                tags[i].append(Tag.objects.get(pk=randint(Tag.objects.first().id, Tag.objects.last().id)))
-
-        question = [
-            Question(
-                author=User.objects.get(pk=randint(User.objects.first().id, User.objects.last().id)),
-                title=Faker().paragraph(nb_sentences=1),
-                text=Faker().text,
-                date=Faker().date,
-                rating=randint(-100, 100),
-                tag=tags[i]
+            question = Question.objects.create(
+                author=User.objects.get(pk=randint(0,COUNT_USER-1)),
+                title="Question"+str(i),
+                text=faker.text
             )
-            for i in range(COUNT_QUESTION)
-        ]
-        Question.objects.bulk_create(question)
-        # for i in range(COUNT_QUESTION):
-        #     question = Question.objects.create(
-        #         author=User.objects.get(pk=randint(User.objects.first().id, User.objects.last().id)),
-        #         title=Faker().paragraph(nb_sentences=1),
-        #         text=Faker().text,
-        #         date=Faker().date,
-        #         rating=randint(-100, 100)
-        #     )
-        #     tags = []
-        #     for j in range(COUNT_TAG_IN_QUESTION):
-        #         tags.append(Tag.objects.get(pk=randint(Tag.objects.first().id, Tag.objects.last().id)))
-        #     question.tag.set(tags)
-        #     print(i)
+            tags = []
+            for j in range(COUNT_TAG_IN_QUESTION):
+                tags.append(Tag.objects.get(pk=randint(Tag.objects.first().id, Tag.objects.last().id)))
+            question.tag.add(*tags)
+            print(i)
 
-        answer = [
-            Answer(
-                body=Faker().text,
-                author=User.objects.get(pk=randint(User.objects.first().id, User.objects.last().id)),
-                date=Faker().date,
+        answer = []
+        for i in range(COUNT_ANSWER):
+            print(i)
+            answer.append(Answer(
+                body=faker.text,
+                author=User.objects.get(pk=randint(0, COUNT_USER-1)),
                 question=Question.objects.get(pk=randint(Question.objects.first().id, Question.objects.last().id)),
                 rating=randint(-100, 100),
-            )
-            for i in range(COUNT_ANSWER)
-        ]
+            ))
         Answer.objects.bulk_create(answer)
-        # for i in range(COUNT_ANSWER):
-        #     Answer.objects.create(body=Faker().text,
-        #                           author=User.objects.get(pk=randint(User.objects.first().id, User.objects.last().id)),
-        #                           date=Faker().date,
-        #                           question=Question.objects.get(
-        #                               pk=randint(Question.objects.first().id, Question.objects.last().id)),
-        #                           rating=randint(-100, 100),
-        #                           )
-        #     print(i)
 
-        obj_q = [] * COUNT_LIKE_QUESTION
+
+        like_q = []
         for i in range(COUNT_LIKE_QUESTION):
-            obj_q[i]=Question.objects.get(pk=randint(User.objects.first().id, User.objects.last().id))
+            obj_q = Question.objects.get(pk=randint(Question.objects.first().id, Question.objects.last().id))
+            like_q.append(
+                Like(
+                    user=User.objects.get(pk=randint(0, COUNT_USER-1)),
+                    content_type=ContentType.objects.get_for_model(obj_q),
+                    rating=1,
+                    object_id=obj_q.id
+                ))
+            print(i)
+        Like.objects.bulk_create(like_q)
 
-        like = [
-            Like.objects.create(
-                user=User.objects.get(pk=randint(User.objects.first().id, User.objects.last().id)),
-                content_type=ContentType.objects.get_for_model(obj_q),
-                rating=1,
-                object_id=obj_q[i].id
-            )
-            for i in range(COUNT_LIKE_QUESTION)
-        ]
-        Like.objects.bulk_create(like)
-        # for i in range(COUNT_LIKE_QUESTION):
-        #     obj = Question.objects.get(pk=randint(User.objects.first().id, User.objects.last().id))
-        #     Like.objects.create(
-        #         user=User.objects.get(pk=randint(User.objects.first().id, User.objects.last().id)),
-        #         content_type=ContentType.objects.get_for_model(obj),
-        #         rating=1,
-        #         object_id=obj.id
-        #     )
-        #     print(i)
-
-        obj_a = [] * COUNT_LIKE_ANSWER
-        for i in range(COUNT_LIKE_ANSWER):
-            obj_a[i] = Answer.objects.get(pk=randint(User.objects.first().id, User.objects.last().id))
-
-        like = [
-            Like.objects.create(
-                user=User.objects.get(pk=randint(User.objects.first().id, User.objects.last().id)),
-                content_type=ContentType.objects.get_for_model(obj_a),
-                rating=1,
-                object_id=obj_a[i].id
-            )
-            for i in range(COUNT_LIKE_ANSWER)
-        ]
-        Like.objects.bulk_create(like)
-        # for i in range(COUNT_LIKE_ANSWER):
-        #     obj = Answer.objects.get(pk=randint(User.objects.first().id, User.objects.last().id))
-        #     Like.objects.create(
-        #         user=User.objects.get(pk=randint(User.objects.first().id, User.objects.last().id)),
-        #         content_type=ContentType.objects.get_for_model(obj),
-        #         rating=1,
-        #         object_id=obj.id
-        #     )
-        #     print(i)
+        like_a = []
+        for i in range(COUNT_LIKE_QUESTION):
+            obj_a = Answer.objects.get(pk=randint(Answer.objects.first().id, Answer.objects.last().id))
+            like_a.append(
+                Like(
+                    user=User.objects.get(pk=randint(0, COUNT_USER-1)),
+                    content_type=ContentType.objects.get_for_model(obj_a),
+                    rating=1,
+                    object_id=obj_a.id
+                ))
+            print(i)
+        Like.objects.bulk_create(like_a)

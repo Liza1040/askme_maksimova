@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse
 
 # Create your views here.
@@ -9,6 +10,7 @@ QUESTIONS = [
         "number": i,
     } for i in range(20)
 ]
+
 def index(request):
     return render(request, "index.html", {"questions": QUESTIONS})
 

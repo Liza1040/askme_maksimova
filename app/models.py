@@ -13,6 +13,9 @@ class Profile(models.Model):
     rating = models.IntegerField(default=0)
     objects = ProfileManager()
 
+    def __str__(self):
+        return self.nickname
+
 class Tag(models.Model):
     text = models.CharField(max_length=16)
     rating = models.IntegerField(default=0)
