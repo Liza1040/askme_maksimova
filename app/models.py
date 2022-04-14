@@ -35,6 +35,9 @@ class Like(models.Model):
     content_id = GenericForeignKey()
     objects = LikeManager()
 
+    class Meta:
+        unique_together =('user', 'content_type')
+
 class Question(models.Model):
     author = models.ForeignKey(User, null=False, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=64)
