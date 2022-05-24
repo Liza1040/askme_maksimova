@@ -85,6 +85,7 @@ def one_question(request, pk):
         'answers': answer,
         'form': user_form})
 
+@login_required
 def ask(request):
     if (request.method == 'GET'):
         user_form = QuestionForm()
