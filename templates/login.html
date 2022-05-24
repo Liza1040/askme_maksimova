@@ -1,46 +1,25 @@
 {% extends "inc/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block userblock %}
     <div>
         <a href="{% url "login" %}" class="userblock-link">log in</a>
-        <a href="{% url "register" %}" class="userblock-link">register</a>
+        <a href="{% url "signup" %}" class="userblock-link">sign up</a>
     </div>
 {% endblock userblock %}
 
 {% block content %}
     <h2 class="mt-5">Log In</h2>
     <div class="form-text text-error">
-        <h5>Sorri, wrong password!</h5>
+        {{error}}
     </div>
-    <form>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="InputLogin" class="form-label">Login</label>
-            </div>
-            <div class="col-10">
-                <input type="text" class="form-control input" id="InputLogin">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="InputPassword" class="form-label">Password</label>
-            </div>
-            <div class="col-10">
-                <input type="password" class="form-control input" id="InputPassword">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2"></div>
-            <div class="col-10">
-                <button type="submit" class="btn btn-primary new-question-ask">Log in!</button>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2"></div>
-            <div class="col-10">
-                <a href="{% url "register" %}">create new account</a>
-            </div>
-        </div>
+    <form action="/login/" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary new-question-ask">Log in!</button>
+        <br>
+        <br>
+        <a href="{% url "signup" %}">create new account</a>
     </form>
 {% endblock content %}

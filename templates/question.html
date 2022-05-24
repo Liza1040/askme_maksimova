@@ -35,8 +35,14 @@
             {%  include "inc/answer.html" %}
     {% endfor %}
     <hr/>
-    <div class="mb-3 section-title">
-        <textarea class="form-control" id="questionText" placeholder="Enter your answer here..." rows="3"></textarea>
-        <button type="submit" class="btn btn-primary new-question-ask">Answer</button>
-    </div>
+    {% if request.user.is_authenticated %}
+        <div class="mb-3 section-title">
+            <form action="" method="post">
+                {% csrf_token %}
+                <label>Answer</label>
+                {{ form.body }}
+                <button class="btn btn-primary new-question-asks">Answer!</button>
+            </form>
+        </div>
+    {% endif %}
 {% endblock content %}

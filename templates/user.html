@@ -1,56 +1,22 @@
 {% extends "inc/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block content %}
-    <h2 class="mt-5">Settings: Елизавета Максимова</h2>
+    <h2 class="mt-5">Settings: {{ login }}</h2>
     <div class="form-text text-error">
-        <h5>Sorri, the email address allready registred!</h5>
+        <div class="error">{{ err }}</div>
     </div>
     <form>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="InputLogin" class="form-label">Login</label>
-            </div>
-            <div class="col-10">
-                <input type="text" class="form-control input" id="InputLogin" placeholder="liza">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="InputEmail" class="form-label">Email</label>
-            </div>
-            <div class="col-10">
-                <input type="email" class="form-control input" id="InputEmail" placeholder="liza@mail.ru">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="InputNickName" class="form-label">NickName</label>
-            </div>
-            <div class="col-10">
-                <input type="text" class="form-control input" id="InputNickName" placeholder="lizaM">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="InputAvatar" class="form-label">Upload avatar</label>
-            </div>
-            <div class="col-2">
-                    <img class="avatar-question" src="{% static "img/duck.jpeg" %}" alt="">
-            </div>
-            <div class="col-4">
-                <input type="text" class="form-control input" id="InputAvatar" placeholder="img\duck.jpeg">
-            </div>
-            <div class="col-4">
-                <button type="submit" class="btn btn-primary choose-avatar">choose</button>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2">
-            </div>
-            <div class="col-10">
-                <button type="submit" class="btn btn-primary new-question-ask">Save</button>
-            </div>
-        </div>
-      </form>
+        {% csrf_token %}
+        {{ form.login.label }}
+        {{ form.login }}<br>
+        {{ form.email.label }}
+        {{ form.email }}<br>
+        {{ form.nickname.label }}
+        {{ form.nickname }}<br>
+        {{ form.avatar.label }}
+        {{ form.avatar }}<br>
+        <button type="submit" class="btn btn-primary new-question-ask">Save</button>
+    </form>
 {% endblock content %}

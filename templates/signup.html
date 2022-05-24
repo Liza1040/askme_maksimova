@@ -1,75 +1,31 @@
 {% extends "inc/base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 
 {% block userblock %}
     <div>
         <a href="{% url "login" %}" class="userblock-link">log in</a>
-        <a href="{% url "register" %}" class="userblock-link">register</a>
+        <a href="{% url "signup" %}" class="userblock-link">sign up</a>
     </div>
 {% endblock userblock %}
 
 {% block content %}
-                <h2 class="mt-5">Registration</h2>
-                <div class="form-text text-error">
-                    <h5>Sorri, the email address allready registred!</h5>
-                </div>
-                <form>
-                    <div class="row mb-3">
-                        <div class="col-2">
-                            <label for="InputLogin" class="form-label">Login</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" class="form-control input" id="InputLogin">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2">
-                            <label for="InputEmail" class="form-label">Email</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="email" class="form-control input" id="InputEmail">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2">
-                            <label for="InputNickName" class="form-label">NickName</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" class="form-control input" id="InputNickName">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2">
-                            <label for="InputPassword" class="form-label">Password</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="password" class="form-control input" id="InputPassword">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2">
-                            <label for="RepeatPassword" class="form-label">Repeat password</label>
-                        </div>
-                        <div class="col-10">
-                            <input type="password" class="form-control input" id="RepeatPassword">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2">
-                            <label for="InputAvatar" class="form-label">Upload avatar</label>
-                        </div>
-                        <div class="col-4">
-                            <input type="text" class="form-control input" id="InputAvatar">
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-primary choose-avatar">choose</button>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-2"></div>
-                        <div class="col-10">
-                            <button type="submit" class="btn btn-primary new-question-ask">Register!</button>
-                        </div>
-                    </div>
-                  </form>
+    <h2 class="mt-5">Registration</h2>
+    {% for err in error %}
+        <div class="error">{{ err }}</div>
+    {% endfor %}
+    <form action="/signup/" method="post">
+        {% csrf_token %}
+        {{ form.login.label }}
+        {{ form.login }}<br>
+        {{ form.email.label }}
+        {{ form.email }}<br>
+        {{ form.nickname.label }}
+        {{ form.nickname }}<br>
+        {{ form.password.label }}
+        {{ form.password }}<br>
+        {{ form.repeat_password.label }}
+        {{ form.repeat_password }}<br>
+        <button type="submit" class="btn btn-primary new-question-ask">Register!</button>
+    </form>
 {% endblock content %}

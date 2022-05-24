@@ -3,47 +3,24 @@
 
 {% block userblock %}
     <div>
-        <a href="{% url "login" %}" class="userblock-link">log in</a>
-        <a href="register.html" class="userblock-link">register</a>
+        <a href="{% url 'login' %}" class="userblock-link">log in</a>
+        <a href="{% url 'signup' %}" class="userblock-link">sign up</a>
     </div>
 {% endblock userblock %}
 
 {% block content %}
     <h2 class="mt-5">New Question</h2>
-    <div class="form-text text-error">
-        <h5>Sorri, the data is incorrect!</h5>
-    </div>
-    <form>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="InputTitle" class="form-label">Question title</label>
-            </div>
-            <div class="col-10">
-                <input type="text" class="form-control input" id="InputTitle">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="questionText" class="form-label">Text</label>
-            </div>
-            <div class="col-10">
-                <textarea class="form-control input" id="questionText" rows="10"></textarea>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2">
-                <label for="questionTags" class="form-label">Tags</label>
-            </div>
-            <div class="col-10">
-                <input type="text" class="form-control input" id="questionTags">
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-2">
-            </div>
-            <div class="col-10">
-                <button type="submit" class="btn btn-primary new-question-ask">ASK!</button>
-            </div>
-        </div>
-      </form>
+<!--    <div class="form-text text-error">-->
+<!--        <h5>Sorri, the data is incorrect!</h5>-->
+<!--    </div>-->
+    <form action="/ask/" method="post">
+        {% csrf_token %}
+        {{ form.title.label }}
+        {{ form.title }}<br>
+        {{ form.text.label }}
+        {{ form.text }}<br>
+        {{ form.tag.label }}
+        {{ form.tag }}
+        <button type="submit" class="btn btn-primary new-question-ask">ASK!</button>
+    </form>
 {% endblock content %}
