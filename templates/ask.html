@@ -10,9 +10,6 @@
 
 {% block content %}
     <h2 class="mt-5">New Question</h2>
-<!--    <div class="form-text text-error">-->
-<!--        <h5>Sorri, the data is incorrect!</h5>-->
-<!--    </div>-->
     <form action="/ask/" method="post">
         {% csrf_token %}
         {{ form.title.label }}
@@ -23,4 +20,5 @@
         {{ form.tag }}
         <button type="submit" class="btn btn-primary new-question-ask">ASK!</button>
     </form>
+{% include "inc/scripts.html" %}
 {% endblock content %}

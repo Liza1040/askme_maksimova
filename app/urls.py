@@ -15,6 +15,8 @@ Including another URLconf
 """
 
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 from app import views
 
 urlpatterns = [
@@ -27,4 +29,8 @@ urlpatterns = [
     path('tag/<pk>', views.tag, name='tag'),
     path('hot/', views.hot, name='hot'),
     path('logout/', views.logout, name='logout'),
-]
+    path('vote/', views.vote, name='vote'),
+    path('vote_current/', views.vote_correct, name='vote'),
+    path('vote_answer/', views.vote_answer, name='vote')
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
++ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

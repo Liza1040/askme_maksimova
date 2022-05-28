@@ -11,4 +11,7 @@
         {% include "inc/question.html" %}
     {% endfor %}
 {% endblock content %}
+{% block jscode %}
+    <script src="{% static "js/vote.js" %}"> </script>
+{% endblock jscode %}
 {% include "inc/paginator.html" %}

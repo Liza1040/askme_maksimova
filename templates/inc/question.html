@@ -1,14 +1,17 @@
 {% load static %}
 <div class="row question">
     <div class="col-2">
-        <img class="avatar-question" src="{% static "img/duck.jpeg" %}">
+        <img class="avatar-question" src="{{ question.author.profile.avatar.url}}">
+        <h6 class="rating" id="{{ question.pk }}">{{ question.rating}}</h6>
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
-                <img src="{% static "img/like.png" %}" width="40px" height="30px">
-            </button>
-            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
-                <img src="{% static "img/dislike.png" %}" width="40px" height="30px">
-            </button>
+            {% if request.user.is_authenticated %}
+                <button type="button" class="btn btn-primary btn-sm button-like-dislike like" id="like{{ question.pk }}" data-action="like" data-qid="{{ question.pk }}">
+                    <img src="{% static "img/like.png" %}" width="40px" height="30px">
+                </button>
+                <button type="button" class="btn btn-primary btn-sm button-like-dislike dislike" id="dislike{{ question.pk }}" data-action="dislike" data-qid="{{ question.pk }}">
+                    <img src="{% static "img/dislike.png" %}" width="40px" height="30px">
+                </button>
+            {% endif %}
         </div>
     </div>
     <div class="col-10">

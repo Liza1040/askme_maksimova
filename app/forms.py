@@ -3,9 +3,11 @@ from django.forms import Textarea, TextInput, FileInput
 
 from app.models import *
 
+
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
 
 class RegisterForm(forms.Form, forms.ModelForm):
     login = forms.CharField(widget=TextInput(attrs={
@@ -18,10 +20,20 @@ class RegisterForm(forms.Form, forms.ModelForm):
                 'placeholder': 'Email'
             }),
         label='Email')
+    first_name = forms.CharField(widget=TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'first_name'
+            }),
+        label='First_name')
+    last_name = forms.CharField(widget=TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'last_name'
+        }),
+        label='Last_name')
     nickname = forms.CharField(widget=TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'nickname'
-            }),
+                }),
         label='Nickname')
     password = forms.CharField(widget=forms.PasswordInput(attrs={
                 'class': 'form-control',
@@ -36,7 +48,7 @@ class RegisterForm(forms.Form, forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['login', 'email', 'nickname', 'password', 'repeat_password']
+        fields = ['login', 'email', 'first_name', 'last_name', 'nickname', 'password', 'repeat_password']
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -69,22 +81,33 @@ class RegisterForm(forms.Form, forms.ModelForm):
             self.add_error(None, 'Passwords does not math')
         return self.cleaned_data
 
-class SettingsForm(forms.Form, forms.ModelForm):
-    login = forms.CharField(required=False, widget=TextInput(attrs={
+
+class SettingsForm(forms.Form,forms.ModelForm):#forms.Form, forms.ModelForm):
+    username = forms.CharField(required=False, disabled=True, widget=TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'login'
+                'placeholder': 'username'
             }),
-        label='Login')
+        label='Username')
     email = forms.EmailField(required=False, widget=TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Email'
             }),
         label='Email')
     nickname = forms.CharField(required=False, widget=TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'nickname'
+        'class': 'form-control',
+        'placeholder': 'nickname'
             }),
         label='Nickname')
+    first_name = forms.CharField(required=False, widget=TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'first_name'
+            }),
+        label='First_name')
+    last_name = forms.CharField(required=False, widget=TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'last_name'
+            }),
+        label='Last_name')
     avatar = forms.ImageField(required=False, widget=FileInput(attrs={
                 'class': 'form-control'
             }),
@@ -110,17 +133,9 @@ class SettingsForm(forms.Form, forms.ModelForm):
         else:
             return nickname
 
-    def clean_login(self):
-        login = self.cleaned_data['login']
-        check = User.objects.filter(username=login).exists()
-        if check:
-            self.add_error(None, 'Login already exists')
-        else:
-            return login
-
     class Meta:
         model = User
-        fields = ['login', 'email', 'nickname', 'avatar']
+        fields = ['username', 'email', 'nickname', 'first_name', 'last_name', 'avatar']
 
     def save(self, *args, **kwarg):
         user = super().save(*args, **kwarg)
@@ -128,6 +143,7 @@ class SettingsForm(forms.Form, forms.ModelForm):
             user.profile.avatar = self.cleaned_data['avatar']
         user.profile.save()
         return user
+
 
 class QuestionForm(forms.ModelForm):
     title = forms.CharField(widget=TextInput(attrs={
@@ -154,6 +170,7 @@ class QuestionForm(forms.ModelForm):
         labels = {
             'text': 'Text'
         }
+
 
 class AnswerForm(forms.ModelForm):
     class Meta:

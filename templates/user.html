@@ -3,20 +3,27 @@
 {% load bootstrap4 %}
 
 {% block content %}
-    <h2 class="mt-5">Settings: {{ login }}</h2>
+    <h2 class="mt-5">Settings: {{ nickname }}</h2>
     <div class="form-text text-error">
         <div class="error">{{ err }}</div>
     </div>
-    <form>
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.login.label }}
-        {{ form.login }}<br>
+        {{ form.username.label }}
+        {{ form.username }}<br>
         {{ form.email.label }}
         {{ form.email }}<br>
         {{ form.nickname.label }}
         {{ form.nickname }}<br>
+        {{ form.first_name.label }}
+        {{ form.first_name }}<br>
+        {{ form.last_name.label }}
+        {{ form.last_name }}<br>
         {{ form.avatar.label }}
         {{ form.avatar }}<br>
+        <img src="{{request.user.profile.avatar.url}}" width = "100px">
+        <br>
         <button type="submit" class="btn btn-primary new-question-ask">Save</button>
     </form>
+{% include "inc/scripts.html" %}
 {% endblock content %}

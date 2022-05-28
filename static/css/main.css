@@ -47,6 +47,15 @@ main > .container {
     background-color: transparent;
 }
 
+.button-like-dislike_answer{
+    margin-top: 10px;
+    padding: 0px;
+    width: 50px;
+    border: 0px;
+    height: 50px;
+    background-color: transparent;
+}
+
 .margin-left {
     margin-left: 30px;
 }
@@ -100,5 +109,25 @@ main > .container {
   padding: 0px 15px;
   text-decoration: none;
   font-size: 17px;
+}
+
+.rating {
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  border: 2px solid blue;
+  border-radius: 5px;
+}
+
+.like {
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dislike {
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
 }
 

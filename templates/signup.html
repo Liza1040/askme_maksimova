@@ -20,6 +20,10 @@
         {{ form.login }}<br>
         {{ form.email.label }}
         {{ form.email }}<br>
+        {{ form.first_name.label }}
+        {{ form.first_name }}<br>
+        {{ form.last_name.label }}
+        {{ form.last_name }}<br>
         {{ form.nickname.label }}
         {{ form.nickname }}<br>
         {{ form.password.label }}
@@ -28,4 +32,5 @@
         {{ form.repeat_password }}<br>
         <button type="submit" class="btn btn-primary new-question-ask">Register!</button>
     </form>
+{% include "inc/scripts.html" %}
 {% endblock content %}

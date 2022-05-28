@@ -1,19 +1,28 @@
 {% load static %}
 <div class="row question">
     <div class="col-2">
-        <img class="avatar-question" src="{% static "img/duck.jpeg" %}" alt="">
+        <img class="avatar-question" src="{{ answer.author.profile.avatar.url}}" alt="">
+        <h6 class="rating" id="answer{{ answer.pk }}">{{ answer.rating}}</h6>
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
-                <img src="{% static "img/like.png" %}" width="40px" height="30px">
-            </button>
-            <button type="button" class="btn btn-primary btn-sm button-like-dislike">
-                <img src="{% static "img/dislike.png" %}" width="40px" height="30px">
-            </button>
+            {% if request.user.is_authenticated %}
+                <button type="button" class="btn btn-primary btn-sm button-like-dislike_answer like" id="answer_like{{ answer.pk }}" data-action="like" data-aid="{{ answer.pk }}">
+                    <img src="{% static "img/like.png" %}" width="40px" height="30px">
+                </button>
+                <button type="button" class="btn btn-primary btn-sm button-like-dislike_answer dislike" id="answer_dislike{{ answer.pk }}" data-action="dislike" data-aid="{{ answer.pk }}">
+                    <img src="{% static "img/dislike.png" %}" width="40px" height="30px">
+                </button>
+            {% endif %}
         </div>
     </div>
     <div class="col-10">
         <p>{{ answer.body }}</p>
-        <input type="checkbox" id="correct{{ answer.pk }}" data-aid="{{ answer.pk }}" data-qid="{{ q.pk }}" {% if answer.correct %} checked {% endif %}>
-        Correct!
+        {% if request.user == question.author %}
+            <input type="checkbox" id="correct{{ answer.pk }}" data-aid="{{ answer.pk }}" data-qid="{{ question.pk }}" class="js-current form-check-input" {% if answer.correct %} checked {% endif %}>
+            Correct!
+        {% else %}
+            {% if answer.correct %}
+                <font color="green">Correct!</font>
+            {% endif %}
+        {% endif %}
     </div>
 </div>
