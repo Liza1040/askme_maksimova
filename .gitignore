@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 .idea/
+node_modules/
 downloads/
 eggs/
 .eggs/
