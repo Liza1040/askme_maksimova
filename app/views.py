@@ -290,10 +290,3 @@ def vote_correct(request):
     a.refresh_from_db()
 
     return JsonResponse({'status': 'ok', 'correct': a.correct, 'incorrect': incorrect})
-
-# def tag(request, t):
-#     return render(request, "tag.html", {"tag": t, "questions": QUESTIONS})
-
-
-# def hot(request):
-#     return render(request, "hot.html", {"questions": QUESTIONS})
