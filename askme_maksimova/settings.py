@@ -128,10 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # AUTH_USER_MODEL ='app.CustomUser'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+STATIC_ROOT = BASE_DIR / 'static/' #вместо STATICFILES_DIRS
 LOGIN_URL = '/login/'
 
 MEDIA_ROOT = BASE_DIR / 'media/'
